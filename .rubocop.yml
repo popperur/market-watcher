@@ -1,16 +1,40 @@
-# Omakase Ruby styling for Rails
-inherit_gem: { rubocop-rails-omakase: rubocop.yml }
+require:
+  - rubocop-capybara
+  - rubocop-factory_bot
+  - rubocop-performance
+  - rubocop-rails
+  - rubocop-rspec
+  - rubocop-rspec_rails
+
+AllCops:
+  NewCops: enable
+  Exclude:
+    - db/schema.rb
+    - vendor/**/*
+    - bin/bundle
+    - bin/rails
+    - bin/rake
+    - tmp/**/*
 
 Layout/LineLength:
-  AutoCorrect: true
   Max: 120
+  AutoCorrect: true
 
-Style/Documentation:
+Metrics/BlockLength:
+  Max: 50 # Allow up to 50 lines per block
+  AllowedMethods:
+    - describe
+    - context
+    - it
+
+Style/ClassAndModuleChildren:
   Enabled: false
-Style/MethodCallWithArgsParentheses:
-  Enabled: true
-  IgnoreMacros: false
+
 Style/StringLiterals:
   EnforcedStyle: double_quotes
+
 Style/StringLiteralsInInterpolation:
+  Enabled: false
+
+Style/Documentation:
   Enabled: false
