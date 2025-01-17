@@ -1,0 +1,32 @@
+<div class="w-full flex flex-col items-center">
+  <div class="text-center mb-8">
+    <h1 class="text-5xl font-bold text-gray-800 drop-shadow-lg">Market Watcher</h1>
+  </div>
+  <div class="w-full max-w-sm card mb-8">
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <div class="mb-4">
+        <%= f.label :email, class: "form-label" %>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-input" %>
+      </div>
+
+      <div class="mb-4">
+        <%= f.label :password, class: "form-label" %>
+        <%= f.password_field :password, autocomplete: "current-password", class: "form-input" %>
+      </div>
+
+      <% if devise_mapping.rememberable? %>
+        <div class="mb-4 flex items-center">
+          <%= f.check_box :remember_me, class: "form-checkbox" %>
+          <%= f.label :remember_me, class: "form-label-checkbox" %>
+        </div>
+      <% end %>
+
+      <div>
+        <%= f.submit "Log in", class: "btn-primary w-full" %>
+      </div>
+    <% end %>
+  </div>
+  <div class="w-full max-w-sm">
+    <%= render 'shared/flash_messages' %>
+  </div>
+</div>
