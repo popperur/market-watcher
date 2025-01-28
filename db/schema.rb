@@ -10,9 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_01_13_004406) do
+ActiveRecord::Schema[8.0].define(version: 2025_01_26_173629) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+
+  create_table "trades", force: :cascade do |t|
+    t.string "stock_symbol", null: false
+    t.string "exchange_name", null: false
+    t.string "exchange_trade_id", null: false
+    t.decimal "price", precision: 10, scale: 2, null: false
+    t.integer "quantity", null: false
+    t.datetime "timestamp", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["stock_symbol"], name: "index_trades_on_stock_symbol"
+    t.index ["timestamp"], name: "index_trades_on_timestamp"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "name", null: false
