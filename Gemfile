@@ -23,7 +23,7 @@ group(:development, :test) do
   gem("factory_bot_rails")
   gem("faker")
   gem("pry-byebug")
-  gem("rspec-rails", "~> 7.0.0")
+  gem("rspec-rails", "~> 7.1.1")
   gem("rubocop", require: false)
   gem("rubocop-capybara", require: false)
   gem("rubocop-factory_bot", require: false)
