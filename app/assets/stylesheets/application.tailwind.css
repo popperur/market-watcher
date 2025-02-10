@@ -16,7 +16,10 @@
     @apply h-4 w-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500;
   }
   .btn-primary {
-    @apply bg-indigo-600 text-white font-medium py-2 px-4 rounded hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 cursor-pointer;
+    @apply bg-indigo-600 text-white font-medium px-4 py-2 rounded hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 cursor-pointer;
+  }
+  .btn-secondary {
+    @apply bg-gray-100 text-gray-800 border border-gray-300 rounded hover:bg-gray-200 px-4 py-2 cursor-pointer;
   }
   .card {
     @apply p-4 border border-gray-200 rounded shadow bg-white;
@@ -24,5 +27,7 @@
   .flash {
     @apply w-full border px-4 py-3 rounded mb-4 text-sm
   }
-
+  .logo {
+    @apply text-5xl font-bold text-gray-800 drop-shadow-lg;
+  }
 }

@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 class Trade < ApplicationRecord
-  STOCK_SYMBOLS = %w[AAPL INST ORCL TSLA].freeze
+  STOCK_SYMBOL_AAPL = "AAPL"
+  STOCK_SYMBOLS = (%w[INST ORCL TSLA] + [STOCK_SYMBOL_AAPL]).sort.freeze
 
   # Alpaca's free market data offering includes live data only from the IEX exchange
   # https://docs.alpaca.markets/docs/historical-stock-data-1#data-sources

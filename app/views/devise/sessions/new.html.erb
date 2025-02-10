@@ -1,6 +1,6 @@
 <div class="w-full flex flex-col items-center">
   <div class="text-center mb-8">
-    <h1 class="text-5xl font-bold text-gray-800 drop-shadow-lg">Market Watcher</h1>
+    <h1 class="logo">Market Watcher</h1>
   </div>
   <div class="w-full max-w-sm card mb-8">
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
@@ -26,7 +26,7 @@
       </div>
     <% end %>
   </div>
-  <div class="w-full max-w-sm">
+  <div class="flash-messages w-full max-w-sm">
     <%= render 'shared/flash_messages' %>
   </div>
 </div>

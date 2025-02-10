@@ -3,8 +3,8 @@
 source("https://rubygems.org")
 
 gem("bootsnap", require: false)
+gem("chartkick")
 gem("devise", "~> 4.9")
-
 gem("importmap-rails")
 gem("kamal", require: false)
 gem("pg", "~> 1.1")
@@ -16,10 +16,11 @@ gem("tailwindcss-rails")
 gem("thruster", require: false)
 gem("turbo-rails")
 gem("tzinfo-data", platforms: %i[windows jruby])
+gem("websocket-client-simple")
 
 group(:development, :test) do
   gem("brakeman", require: false)
-  gem("debug", platforms: %i[mri windows], require: "debug/prelude")
+  gem("pry-byebug")
   gem("factory_bot_rails")
   gem("faker")
   gem("rspec-rails", "~> 7.0.0")
