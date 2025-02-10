@@ -20,9 +20,9 @@ gem("websocket-client-simple")
 
 group(:development, :test) do
   gem("brakeman", require: false)
-  gem("pry-byebug")
   gem("factory_bot_rails")
   gem("faker")
+  gem("pry-byebug")
   gem("rspec-rails", "~> 7.0.0")
   gem("rubocop", require: false)
   gem("rubocop-capybara", require: false)

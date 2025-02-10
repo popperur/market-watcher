@@ -42,8 +42,9 @@ RSpec.describe(Trade) do
   describe("callbacks") do
     it("broadcasts to trades after creation") do
       trade = build(:trade)
-      expect(trade).to(receive(:broadcast_append_to).with("trades"))
+      allow(trade).to(receive(:broadcast_append_to))
       trade.save!
+      expect(trade).to(have_received(:broadcast_append_to).with("trades"))
     end
   end
 end
