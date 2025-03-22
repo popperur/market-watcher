@@ -35,13 +35,16 @@ Rails/Output:
   Enabled: false
 
 RSpec/ExampleLength:
-  Max: 6
+  Max: 10
 
 RSpec/LetSetup:
   Enabled: false
 
 RSpec/NestedGroups:
   Max: 4
+
+RSpec/VerifiedDoubles:
+  Enabled: false
 
 Style/ClassAndModuleChildren:
   Enabled: false

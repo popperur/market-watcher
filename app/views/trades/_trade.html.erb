@@ -1,0 +1,15 @@
+<turbo-stream action="append" target="trades">
+  <template>
+    <script>
+      // TODO: MARK: WIP - we need only the "time" field, see TradesHelper
+      document
+        .querySelector("[data-controller='chart']")
+        .controller.update(
+        {
+          time: <%= trade.timestamp.strftime("%H:%M:%S") %>,
+          price: <%= trade.price %>
+        }
+      );
+    </script>
+  </template>
+</turbo-stream>
