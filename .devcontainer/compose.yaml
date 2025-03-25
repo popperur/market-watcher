@@ -5,18 +5,9 @@ services:
     build:
       context: ..
       dockerfile: .devcontainer/Dockerfile
-
     volumes:
     - ../..:/workspaces:cached
-
-    # Overrides default command so things don't shut down after the process ends.
-    command: sleep infinity
-
-    # Uncomment the next line to use a non-root user for all processes.
-    # user: vscode
-
-    # Use "forwardPorts" in **devcontainer.json** to forward an app port locally.
-    # (Adding the "ports" property to this file will not forward from a Codespace.)
+    command: sleep infinity # Overrides default command so things don't shut down after the process ends.
     depends_on:
     - selenium
     - postgres
@@ -36,10 +27,9 @@ services:
     environment:
         POSTGRES_USER: postgres
         POSTGRES_PASSWORD: postgres
+
   redis:
     image: redis:6.2.6-alpine
-    ports:
-      - 6379:6379
     volumes:
       - redis-data:/data:rw
 
