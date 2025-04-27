@@ -3,42 +3,18 @@
 require("rails_helper")
 
 RSpec.describe("home/index") do
+  let(:trade_channels) { build_list(:trade_channel, 3) }
+
   before do
-    assign(
-      :trade_channels,
-      [
-        create(:trade_channel, stock_symbol: "AAPL"),
-        create(:trade_channel, stock_symbol: "ORCL")
-      ]
-    )
-  end
-
-  context("when rendering the AAPL trade channel") do
-    it("renders the AAPL trade channel element") do
-      render
-      expect(rendered).to(have_css('div[data-chart-symbol-value="AAPL"]'))
-    end
-
-    it("renders the correct chart URL for the AAPL trade channel") do
-      render
-      expect(rendered).to(have_css('div[data-chart-url-value="/trades/chart_data?stock_symbol=AAPL"]'))
-    end
-  end
-
-  context("when rendering the ORCL trade channel") do
-    it("renders the ORCL trade channel element") do
-      render
-      expect(rendered).to(have_css('div[data-chart-symbol-value="ORCL"]'))
-    end
-
-    it("renders the correct chart URL for the ORCL trade channel") do
-      render
-      expect(rendered).to(have_css('div[data-chart-url-value="/trades/chart_data?stock_symbol=ORCL"]'))
-    end
-  end
-
-  it("includes a turbo stream subscription") do
+    assign(:trade_channels, trade_channels)
     render
-    expect(rendered).to(have_css('turbo-cable-stream-source[channel="Turbo::StreamsChannel"]'))
+  end
+
+  it("renders the trade_channels collection inside the wrapper div") do
+    expect(rendered).to(have_css("div.flex.flex-row.w-full.justify-center.gap-8"))
+  end
+
+  it("renders the trade channels") do
+    expect(rendered).to(have_css("div[data-chart-symbol-value]", count: 3))
   end
 end

@@ -10,8 +10,8 @@ class TradesController < ApplicationController
     labels, values = formatted_trades.map { |timestamp, price| [timestamp.strftime("%H:%M:%S"), price.to_f] }.transpose
     render(
       json: {
-        labels: labels,
-        values: values
+        labels: labels || [],
+        values: values || []
       }
     )
   end

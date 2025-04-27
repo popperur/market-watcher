@@ -17,5 +17,14 @@ class Trade < ApplicationRecord
   validates(:quantity, presence: true, numericality: { only_integer: true, greater_than: 0 })
   validates(:timestamp, presence: true)
 
-  after_create_commit(-> { broadcast_append_to("trades") })
+  after_create_commit(:broadcast_trade_to_channel)
+
+  private
+
+  def broadcast_trade_to_channel
+    broadcast_replace_to(
+      "trade_channel_#{stock_symbol}",
+      target: "stimulus_target_#{stock_symbol}"
+    )
+  end
 end

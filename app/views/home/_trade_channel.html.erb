@@ -2,8 +2,11 @@
   data-controller="chart"
   data-chart-url-value="<%= trades_chart_data_path(stock_symbol: trade_channel.stock_symbol) %>"
   data-chart-symbol-value="<%= trade_channel.stock_symbol %>"
-  class="card w-2/4"
->
+  class="card w-2/4">
   <h3 class="text-center" data-chart-target="symbolAndPrice"></h3>
   <canvas data-chart-target="chart"></canvas>
 </div>
+
+<div id="stimulus_target_<%= trade_channel.stock_symbol %>"></div>
+
+<%= turbo_stream_from "trade_channel_#{trade_channel.stock_symbol}" %>

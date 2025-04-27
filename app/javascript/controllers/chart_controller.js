@@ -5,6 +5,8 @@ export default class extends Controller {
   static values = { url: String, symbol: String }
 
   connect() {
+    this.chart = null
+    this.chartData = { labels: [], values: [] }
     this.loadTrades()
   }
 
@@ -13,21 +15,25 @@ export default class extends Controller {
       .then(response => response.json())
       .then(data => {
         this.chartData = data
-        this.renderChart()
+        this.renderChart(true)
       })
   }
 
-  update(trade) {
+  update({time, price}) {
     // Push new trade data into the array
-    // TODO: MARK
-    // this.chartData.labels.push(trade.time)
-    // this.chartData.values.push(trade.price)
-    // this.renderChart()
+    this.chartData.labels.push(time)
+    this.chartData.values.push(price)
+    this.renderChart()
   }
 
-  renderChart() {
-    const ctx = this.chartTarget.getContext('2d')
-    new Chart(ctx, {
+  renderChart(showAnimation = false) {
+    const ctx = this.chartTarget.getContext("2d")
+
+    if (this.chart) {
+      this.chart.destroy()
+    }
+
+    this.chart = new Chart(ctx, {
       type: "line",
       data: {
         labels: this.chartData.labels,
@@ -43,6 +49,7 @@ export default class extends Controller {
         ],
       },
       options: {
+        animation: showAnimation,
         plugins: {
           legend: {
             display: false
@@ -78,7 +85,11 @@ export default class extends Controller {
         },
       },
     })
-    const currentPrice = this.chartData.values.slice(-1)[0]
-    this.symbolAndPriceTarget.textContent = `${this.symbolValue} - $${currentPrice.toFixed(2)}`
+    if (this.chartData.values) {
+      const currentPrice = this.chartData.values.slice(-1)[0]
+      if (currentPrice) {
+        this.symbolAndPriceTarget.textContent = `${this.symbolValue} - $${currentPrice.toFixed(2)}`
+      }
+    }
   }
 }

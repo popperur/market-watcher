@@ -41,10 +41,15 @@ RSpec.describe(Trade) do
 
   describe("callbacks") do
     it("broadcasts to trades after creation") do
-      trade = build(:trade)
-      allow(trade).to(receive(:broadcast_append_to))
+      trade = build(:trade, stock_symbol: "AAPL")
+      allow(trade).to(receive(:broadcast_replace_to))
       trade.save!
-      expect(trade).to(have_received(:broadcast_append_to).with("trades"))
+      expect(trade).to(
+        have_received(:broadcast_replace_to).with(
+          "trade_channel_AAPL",
+          target: "stimulus_target_AAPL"
+        )
+      )
     end
   end
 end

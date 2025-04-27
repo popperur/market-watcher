@@ -1,15 +1,7 @@
-<turbo-stream action="append" target="trades">
-  <template>
-    <script>
-      // TODO: MARK: WIP - we need only the "time" field, see TradesHelper
-      document
-        .querySelector("[data-controller='chart']")
-        .controller.update(
-        {
-          time: <%= trade.timestamp.strftime("%H:%M:%S") %>,
-          price: <%= trade.price %>
-        }
-      );
-    </script>
-  </template>
-</turbo-stream>
+<div
+  id="stimulus_target_<%= trade.stock_symbol %>"
+  data-controller="trade-updater"
+  data-trade-updater-symbol-value="<%= trade.stock_symbol %>"
+  data-trade-updater-price-value="<%= trade.price %>"
+  data-trade-updater-time-value="<%= trade.timestamp.strftime("%H:%M:%S") %>"
+></div>
