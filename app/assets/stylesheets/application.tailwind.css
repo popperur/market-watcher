@@ -25,7 +25,7 @@
     @apply p-4 border border-gray-200 rounded shadow bg-white;
   }
   .flash {
-    @apply w-full border px-4 py-3 rounded mb-4 text-sm
+    @apply w-full border px-4 py-3 rounded mb-4 text-sm;
   }
   .logo {
     @apply text-5xl font-bold text-gray-800 drop-shadow-lg;

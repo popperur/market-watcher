@@ -12,14 +12,14 @@ export default class extends Controller {
 
   loadTrades() {
     fetch(this.urlValue)
-      .then(response => response.json())
-      .then(data => {
+      .then((response) => response.json())
+      .then((data) => {
         this.chartData = data
         this.renderChart(true)
       })
   }
 
-  update({time, price}) {
+  update({ time, price }) {
     // Push new trade data into the array
     this.chartData.labels.push(time)
     this.chartData.values.push(price)
@@ -44,7 +44,7 @@ export default class extends Controller {
             borderColor: "blue",
             borderWidth: 1,
             backgroundColor: "rgba(0, 0, 255, 0.2)",
-            fill: true
+            fill: true,
           },
         ],
       },
@@ -52,7 +52,7 @@ export default class extends Controller {
         animation: showAnimation,
         plugins: {
           legend: {
-            display: false
+            display: false,
           },
           tooltip: {
             callbacks: {
@@ -60,7 +60,7 @@ export default class extends Controller {
                 return `Stock Price: $${context.raw.toFixed(2)}`
               },
             },
-          }
+          },
         },
         scales: {
           x: {
@@ -71,8 +71,7 @@ export default class extends Controller {
               callback: (index) => {
                 const tokens = this.chartData.labels[index].split(":")
                 return `${tokens[1]}:${tokens[2]}`
-              }
-
+              },
             },
           },
           y: {

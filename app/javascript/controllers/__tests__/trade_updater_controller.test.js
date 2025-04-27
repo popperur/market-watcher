@@ -19,11 +19,13 @@ describe("TradeUpdaterController", () => {
     mockUpdate = jest.fn()
 
     const mockChartController = {
-      update: mockUpdate
+      update: mockUpdate,
     }
 
     // Set mock before registering controller to ensure connect() sees it
-    application.getControllerForElementAndIdentifier = jest.fn(() => mockChartController)
+    application.getControllerForElementAndIdentifier = jest.fn(
+      () => mockChartController,
+    )
   })
 
   afterEach(() => {
@@ -37,7 +39,7 @@ describe("TradeUpdaterController", () => {
 
     expect(mockUpdate).toHaveBeenCalledWith({
       price: 200,
-      time: "10:15:22"
+      time: "10:15:22",
     })
   })
 
@@ -53,7 +55,7 @@ describe("TradeUpdaterController", () => {
 
     expect(consoleSpy).toHaveBeenCalledWith(
       "No matching chart controller for symbol:",
-      "AAPL"
+      "AAPL",
     )
   })
 })

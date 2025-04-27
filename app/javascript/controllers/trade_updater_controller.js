@@ -13,7 +13,7 @@ export default class extends Controller {
 
   getChartController() {
     const controllerElement = document.querySelector(
-      `[data-controller='chart'][data-chart-symbol-value='${this.symbolValue}']`
+      `[data-controller='chart'][data-chart-symbol-value='${this.symbolValue}']`,
     )
     if (!controllerElement) {
       return null
@@ -21,19 +21,22 @@ export default class extends Controller {
 
     return this.application.getControllerForElementAndIdentifier(
       controllerElement,
-      "chart"
+      "chart",
     )
   }
 
   updateChart() {
-    const chartController = this.getChartController();
+    const chartController = this.getChartController()
     if (chartController) {
       chartController.update({
         time: this.timeValue,
         price: this.priceValue,
       })
     } else {
-      console.error("No matching chart controller for symbol:", this.symbolValue)
+      console.error(
+        "No matching chart controller for symbol:",
+        this.symbolValue,
+      )
     }
   }
 }

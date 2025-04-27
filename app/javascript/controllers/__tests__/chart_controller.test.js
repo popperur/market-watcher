@@ -37,7 +37,9 @@ describe("ChartController", () => {
 
   describe("connect", () => {
     beforeEach(() => {
-      jest.spyOn(ChartController.prototype, "loadTrades").mockImplementation(() => {})
+      jest
+        .spyOn(ChartController.prototype, "loadTrades")
+        .mockImplementation(() => {})
       application.register("chart", ChartController)
     })
 
@@ -56,12 +58,16 @@ describe("ChartController", () => {
 
   describe("loadTrades", () => {
     beforeEach(() => {
-      jest.spyOn(ChartController.prototype, "renderChart").mockImplementation(() => {})
+      jest
+        .spyOn(ChartController.prototype, "renderChart")
+        .mockImplementation(() => {})
       application.register("chart", ChartController)
     })
 
     it("calls fetch with the correct url", () => {
-      expect(window.fetch).toHaveBeenCalledWith("/trades/chart_data?stock_symbol=AAPL")
+      expect(window.fetch).toHaveBeenCalledWith(
+        "/trades/chart_data?stock_symbol=AAPL",
+      )
     })
 
     it("stores the response in this.chartData", async () => {
@@ -78,8 +84,12 @@ describe("ChartController", () => {
 
   describe("update", () => {
     beforeEach(() => {
-      jest.spyOn(ChartController.prototype, "loadTrades").mockImplementation(() => {})
-      jest.spyOn(ChartController.prototype, "renderChart").mockImplementation(() => {})
+      jest
+        .spyOn(ChartController.prototype, "loadTrades")
+        .mockImplementation(() => {})
+      jest
+        .spyOn(ChartController.prototype, "renderChart")
+        .mockImplementation(() => {})
       application.register("chart", ChartController)
       getController().update({ time: "10:15:22", price: 200 })
     })
@@ -113,7 +123,6 @@ describe("ChartController", () => {
     afterEach(() => {
       delete global.Chart
     })
-
 
     it("calls getContext on canvas", () => {
       expect(HTMLCanvasElement.prototype.getContext).toHaveBeenCalledWith("2d")
