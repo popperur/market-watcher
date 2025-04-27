@@ -4,6 +4,7 @@ class Trade < ApplicationRecord
   STOCK_SYMBOL_AAPL = "AAPL"
   STOCK_SYMBOL_FAKEPACA = "FAKEPACA" # stock symbol used for sandbox
   STOCK_SYMBOLS = (%w[INST ORCL TSLA] + [STOCK_SYMBOL_AAPL, STOCK_SYMBOL_FAKEPACA]).sort.freeze
+  CHART_TIME_FORMAT = "%H:%M:%S"
 
   # Alpaca's free market data offering includes live data only from the IEX exchange
   # https://docs.alpaca.markets/docs/historical-stock-data-1#data-sources
@@ -18,6 +19,10 @@ class Trade < ApplicationRecord
   validates(:timestamp, presence: true)
 
   after_create_commit(:broadcast_trade_to_channel)
+
+  def formatted_timestamp
+    timestamp.strftime(CHART_TIME_FORMAT)
+  end
 
   private
 

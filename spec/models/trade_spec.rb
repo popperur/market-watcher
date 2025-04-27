@@ -39,6 +39,14 @@ RSpec.describe(Trade) do
     end
   end
 
+  describe("#formatted_timestamp") do
+    let(:trade) { build(:trade, timestamp: Time.zone.parse("2023-12-10 08:23:15")) }
+
+    it("returns a formatted timestamp") do
+      expect(trade.formatted_timestamp).to(eq("08:23:15"))
+    end
+  end
+
   describe("callbacks") do
     it("broadcasts to trades after creation") do
       trade = build(:trade, stock_symbol: "AAPL")
