@@ -91,6 +91,9 @@ jobs:
       - name: Install JavaScript dependencies
         run: npm install
 
+      - name: Precompile assets for tests
+        run: bin/rails assets:precompile
+
       - name: Prepare database
         env:
           RAILS_ENV: test
