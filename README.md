@@ -42,7 +42,7 @@ Once the container is started, it will automatically install the required depend
 
 ---
 
-## Run the server
+## Run the Server
 
 1. Open a terminal within the DevContainer environment in your editor.  
 2. Start the Rails server:  
@@ -62,7 +62,19 @@ The default user is subscribed to a trade channel for the Apple stock symbol (`A
 
 ---
 
-## Alpaca Trade Stream
+## Configure Trade Channels
+
+Currently, there is no user interface for configuring trade channels. However, you can set them up through the console:
+
+```ruby
+User.first.trade_channels.create!(stock_symbol: 'ORCL')
+```
+
+You can find the list of supported stock symbols in `Trade::STOCK_SYMBOLS`. Additionally, you’re welcome to add any new symbols that you’d like to track.
+
+---
+
+## Configure Alpaca Trade Stream
 
 To get real-time stock market updates, follow these steps:
 
