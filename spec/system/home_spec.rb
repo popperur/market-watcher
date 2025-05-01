@@ -12,7 +12,8 @@ RSpec.describe("Home") do
   let!(:trade_channel) { create(:trade_channel, user: user, stock_symbol: "AAPL") }
 
   before do
-    system_sign_in(user)
+    login_as(user, scope: :user)
+    visit(root_path)
   end
 
   describe("chart display on page load") do
