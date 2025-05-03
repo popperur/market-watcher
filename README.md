@@ -1,10 +1,12 @@
+![Demo](docs/images/banner.webp)
+
 # Market Watcher
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
 ---
 
-This Ruby on Rails project displays real-time stock market trade charts.  
+Market Watcher displays real-time stock market trade charts.  
 It fetches live trade data from the **Alpaca** service using their WebSocket API.
 
 ![Demo](docs/images/demo.gif)
