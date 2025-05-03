@@ -1,6 +1,7 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
+  static outlets = [ "chart" ]
   static values = {
     symbol: String,
     price: Number,
@@ -12,17 +13,12 @@ export default class extends Controller {
   }
 
   getChartController() {
-    const controllerElement = document.querySelector(
-      `[data-controller='chart'][data-chart-symbol-value='${this.symbolValue}']`,
-    )
-    if (!controllerElement) {
-      return null
+    for (const chartController of this.chartOutlets) {
+      if (chartController.symbolValue === this.symbolValue) {
+        return chartController
+      }
     }
-
-    return this.application.getControllerForElementAndIdentifier(
-      controllerElement,
-      "chart",
-    )
+    return null;
   }
 
   updateChart() {
