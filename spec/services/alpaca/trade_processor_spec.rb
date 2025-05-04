@@ -30,7 +30,7 @@ RSpec.describe(Alpaca::TradeProcessor) do
       end
 
       it("creates a trade record") do
-        trade_processor.process
+        trade_processor.call
         expect(Trade).to(have_received(:create!).with(
                            stock_symbol: "AAPL",
                            exchange_name: Trade::EXCHANGE_NAME_IEX,
@@ -43,7 +43,7 @@ RSpec.describe(Alpaca::TradeProcessor) do
 
       it("logs a success message") do
         allow(Rails.logger).to(receive(:info))
-        trade_processor.process
+        trade_processor.call
         expect(Rails.logger).to(have_received(:info).with("Successfully processed trade for stock: AAPL"))
       end
     end
@@ -56,7 +56,7 @@ RSpec.describe(Alpaca::TradeProcessor) do
       end
 
       it("does not create a trade record") do
-        trade_processor.process
+        trade_processor.call
         expect(Trade).not_to(have_received(:create!))
       end
     end
@@ -70,7 +70,7 @@ RSpec.describe(Alpaca::TradeProcessor) do
 
       it("logs a warning message") do
         allow(Rails.logger).to(receive(:warn))
-        trade_processor.process
+        trade_processor.call
         expect(Rails.logger).to(have_received(:warn).with("Failed to process trade: Test error"))
       end
     end

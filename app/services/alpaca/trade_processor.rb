@@ -6,7 +6,7 @@ module Alpaca
       @trades = trades
     end
 
-    def process
+    def call
       @trades.each do |trade|
         process_trade(trade)
       end

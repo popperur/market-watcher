@@ -45,7 +45,7 @@ module Alpaca
 
       trades = JSON.parse(msg.data)
       Rails.logger.debug { "Incoming WS message: #{trades}" }
-      Alpaca::TradeProcessor.new(trades).process
+      Alpaca::TradeProcessor.new(trades).call
     end
 
     def handle_close(message, sleep_seconds: 5)

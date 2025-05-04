@@ -104,19 +104,16 @@ RSpec.describe(Alpaca::TradeStreamService) do
     let(:message_data) { { "T" => "t", "S" => "AAPL" }.to_json }
     let(:message_double) { double("Message", data: message_data) }
 
-    before do
-      allow(Alpaca::TradeProcessor).to(receive(:new).and_return(instance_double(Alpaca::TradeProcessor, process: true)))
-    end
-
     it("parses the message and processes the trades") do
       trade_processor = instance_double(Alpaca::TradeProcessor)
       allow(Alpaca::TradeProcessor).to(receive(:new).with(JSON.parse(message_data)).and_return(trade_processor))
-      allow(trade_processor).to(receive(:process))
+      allow(trade_processor).to(receive(:call))
       service.handle_message(message_double)
-      expect(trade_processor).to(have_received(:process))
+      expect(trade_processor).to(have_received(:call))
     end
 
     it("does nothing if the message data is blank") do
+      allow(Alpaca::TradeProcessor).to(receive(:new))
       blank_message = double("Message", data: nil)
       service.handle_message(blank_message)
       expect(Alpaca::TradeProcessor).not_to(have_received(:new))
