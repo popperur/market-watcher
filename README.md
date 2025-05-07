@@ -3,11 +3,12 @@
 # Market Watcher
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+![CI](https://github.com/popperur/market-watcher/actions/workflows/ci.yml/badge.svg)
 
 ---
 
-Market Watcher displays real-time stock market trade charts.  
-It fetches live trade data from the **Alpaca** service using their WebSocket API.
+Market Watcher receives real-time stock market trade data and presents it in charts that users 
+can customize with their preferred stock symbols. This project was created as a demonstration of my proficiency in Ruby on Rails.
 
 ![Demo](docs/images/demo.gif)
 
