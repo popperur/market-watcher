@@ -5,11 +5,8 @@ require("rails_helper")
 RSpec.describe("Sessions") do
   let(:user) { create(:user) }
 
-  before do
-    visit(new_user_session_path)
-  end
-
   it("displays the login page correctly") do
+    visit(new_user_session_path)
     expect(page).to(
       have_css("h1.logo", text: "Market Watcher")
         .and(have_field("Email"))
@@ -20,21 +17,27 @@ RSpec.describe("Sessions") do
 
   context("when valid credentials are provided") do
     it("allows the user to log in") do
-      fill_in("Email", with: user.email)
-      fill_in("Password", with: user.password)
-      click_link_or_button("Log in")
+      Capybara.using_session(:valid_user) do
+        visit(new_user_session_path)
+        fill_in("Email", with: user.email)
+        fill_in("Password", with: user.password)
+        click_link_or_button("Log in")
 
-      expect(page).to(have_current_path(root_path))
+        expect(page).to(have_current_path(root_path))
+      end
     end
   end
 
   context("when invalid credentials are provided") do
     it("shows an error") do
-      fill_in("Email", with: "wrong@example.com")
-      fill_in("Password", with: "password")
-      click_link_or_button("Log in")
+      Capybara.using_session(:invalid_user) do
+        visit(new_user_session_path)
+        fill_in("Email", with: "wrong@example.com")
+        fill_in("Password", with: "password")
+        click_link_or_button("Log in")
 
-      expect(page).to(have_content("Oops! Your email or password is incorrect."))
+        expect(page).to(have_content("Oops! Your email or password is incorrect."))
+      end
     end
   end
 end
